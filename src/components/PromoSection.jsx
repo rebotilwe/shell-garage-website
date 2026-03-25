@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
-import petrolImage from '../assets/images/afribiz03069.webp';
+const petrolImage = '/images/afribiz03069.webp';
 
 const PROMOS = [
   {
@@ -9,7 +9,7 @@ const PROMOS = [
     tag:     'FUELS',
     badge:   '🔥 Best Prices',
     desc:    'Shell FuelSave 93, 95, V-Power and Diesel — all available 24/7 at the best prices in Ottawa.',
-    image:   petrolImage,
+ image:   'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&q=80',
     accent:  '#DD1D21',
     cta:     { label: 'View Fuel Prices', to: '/services' },
   },

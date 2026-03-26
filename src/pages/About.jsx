@@ -55,7 +55,7 @@ const scaleIn = {
 export default function About() {
   return (
     <div className="min-h-screen bg-white font-sans">
-      <Navbar />
+   
       
       {/* Hero Section with Red Background */}
       <div className="relative bg-gradient-to-br from-[#DD1D21] to-[#b5181b] overflow-hidden">
@@ -257,7 +257,7 @@ export default function About() {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function Contact() {
   return (
     <PageWrapper>
       <div className="bg-[#0A0A0A] text-white min-h-screen font-sans">
-        <Navbar />
+
 
         <div className="pt-32 max-w-7xl mx-auto px-6 py-16">
           {/* Header */}
@@ -149,7 +149,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <Footer />
+      
       </div>
     </PageWrapper>
   );

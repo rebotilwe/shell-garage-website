@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-// Import real images from assets
-import heroImage from '../assets/images/afribiz03065.webp';
-import architectureImage from '../assets/images/afribiz03005.webp';
-import detailImage from '../assets/images/afribiz03052.webp';
-import communityImage from '../assets/images/afribiz03069.webp';
-import storeImage from '../assets/images/afribiz03019.webp';
-import carWashImage from '../assets/images/afribiz03005.webp';
+// Import real images from assets - USE EXACT FILENAMES (capital A)
+import heroImage from '../assets/images/Afribiz03065.webp';
+import architectureImage from '../assets/images/Afribiz03005.webp';
+import detailImage from '../assets/images/Afribiz03052.webp';
+import communityImage from '../assets/images/Afribiz03069.webp';
+import storeImage from '../assets/images/Afribiz03019.webp';
+import carWashImage from '../assets/images/Afribiz03005.webp';
 
 // Common Image Wrapper with Skeleton Loader
 function SmartImage({ src, alt, className, style }) {
@@ -55,7 +55,7 @@ const scaleIn = {
 export default function About() {
   return (
     <div className="min-h-screen bg-white font-sans">
-   
+      <Navbar />
       
       {/* Hero Section with Red Background */}
       <div className="relative bg-gradient-to-br from-[#DD1D21] to-[#b5181b] overflow-hidden">
@@ -257,7 +257,7 @@ export default function About() {
         </div>
       </section>
 
-   
+      <Footer />
     </div>
   );
 }

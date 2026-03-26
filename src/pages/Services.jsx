@@ -25,7 +25,7 @@ try {
   courierGuy = null;
 }
 
-import spar from '../assets/images/afribiz03072.webp';
+import spar from '../assets/images/Afribiz03072.webp';
 
 // Placeholder fallback
 const PLACEHOLDER_URL = "https://placehold.co/400x400/f0f0f0/333?text=";

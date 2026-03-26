@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 const INFO_ITEMS = [
   {
     icon:  '📍',
     label: 'Address',
-    value: '123 Main Street, Ottawa, Verulam',
-    link:  'https://maps.google.com/?q=Ottawa,Verulam,KwaZulu-Natal',
+    value: '59 Chris Hani Road, Ottawa, Verulam',
+    link:  'https://maps.google.com/?q=59+Chris+Hani+Road+Ottawa+Verulam',
     cta:   'Get Directions',
   },
   {
@@ -18,15 +19,15 @@ const INFO_ITEMS = [
   {
     icon:  '📞',
     label: 'Phone',
-    value: '+27 123 456 789',
-    link:  'tel:+27123456789',
+    value: '075 321 4777',
+    link:  'tel:+2753214777',
     cta:   'Call Now',
   },
   {
     icon:  '✉️',
     label: 'Email',
-    value: 'info@shellottawa.com',
-    link:  'mailto:info@shellottawa.com',
+    value: 'shellgarageottawa@gmail.com',
+    link:  'mailto:shellgarageottawa@gmail.com',
     cta:   'Send Email',
   },
 ];
@@ -56,7 +57,6 @@ function InfoCard({ item, index, visible }) {
         fontFamily:    "'Trebuchet MS', sans-serif",
       }}
     >
-      {/* Icon circle */}
       <div style={{
         width:          44, height: 44, borderRadius: '50%',
         background:     hovered ? '#DD1D21' : '#FFF0F0',
@@ -115,6 +115,16 @@ export default function ContactInfo() {
     return () => obs.disconnect();
   }, []);
 
+  // Social media links
+  const socialLinks = [
+    { icon: <FaFacebookF />, href: 'https://www.facebook.com/ShellSparExpressOttawa', label: 'Facebook', bgHover: '#1877F2' },
+    { icon: <FaInstagram />, href: 'https://www.instagram.com/shell_ottawa', label: 'Instagram', bgHover: '#E1306C' },
+    { icon: <FaTiktok />, href: 'https://www.tiktok.com/@shellspar.express', label: 'TikTok', bgHover: '#000000' },
+  ];
+
+  // Reliable map embed URL
+  const mapEmbedUrl = "https://maps.google.com/maps?q=59+Chris+Hani+Road+Ottawa+Verulam&output=embed";
+
   return (
     <section
       ref={sectionRef}
@@ -124,9 +134,9 @@ export default function ContactInfo() {
         borderTop:  '1px solid #f0f0f0',
       }}
     >
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 48px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
 
-        {/* ── HEADER ── */}
+        {/* HEADER */}
         <div style={{
           marginBottom: 52,
           opacity:      visible ? 1 : 0,
@@ -166,66 +176,139 @@ export default function ContactInfo() {
           }} />
         </div>
 
-        {/* ── TWO COLUMN LAYOUT ── */}
+        {/* TWO COLUMN LAYOUT */}
         <div style={{
-          display:             'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap:                 40,
-          alignItems:          'start',
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: 40,
         }}>
+          {/* Use media query for larger screens */}
+          <style>
+            {`@media (min-width: 768px) {
+              .contact-grid {
+                grid-template-columns: 1fr 1fr;
+              }
+            }`}
+          </style>
 
-          {/* LEFT — Info cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {INFO_ITEMS.map((item, i) => (
-              <InfoCard key={i} item={item} index={i} visible={visible} />
-            ))}
-          </div>
+          <div className="contact-grid" style={{ display: 'grid', gap: 40 }}>
 
-          {/* RIGHT — Map embed placeholder */}
-          <div style={{
-            borderRadius:  10,
-            overflow:      'hidden',
-            boxShadow:     '0 8px 40px rgba(0,0,0,0.12)',
-            opacity:       visible ? 1 : 0,
-            transform:     visible ? 'translateY(0)' : 'translateY(28px)',
-            transition:    'opacity 0.6s 0.3s, transform 0.6s 0.3s',
-            height:        '100%',
-            minHeight:     400,
-            position:      'relative',
-          }}>
-            {/* Google Maps embed — update src with real coords when ready */}
-            <iframe
-              title="Shell Ottawa Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.0!2d31.2!3d-29.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDAzJzAwLjAiUyAzMcKwMTInMDAuMCJF!5e0!3m2!1sen!2sza!4v1"
-              width="100%"
-              height="100%"
-              style={{ border: 0, display: 'block', minHeight: 400 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            {/* LEFT — Info cards + Social Media */}
+            <div>
+              {/* Info Cards */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
+                {INFO_ITEMS.map((item, i) => (
+                  <InfoCard key={i} item={item} index={i} visible={visible} />
+                ))}
+              </div>
 
-            {/* Shell badge overlay on map */}
-            <div style={{
-              position:      'absolute',
-              top:           16, left: 16,
-              background:    '#DD1D21',
-              color:         '#ffffff',
-              padding:       '8px 14px',
-              borderRadius:  6,
-              fontSize:      12, fontWeight: 800,
-              letterSpacing: .5,
-              boxShadow:     '0 4px 16px rgba(221,29,33,0.4)',
-              fontFamily:    "'Trebuchet MS', sans-serif",
-              display:       'flex', alignItems: 'center', gap: 6,
-              pointerEvents: 'none',
-            }}>
-              📍 Shell Ottawa · Verulam
+              {/* Social Media Section */}
+              <div style={{
+                background: '#ffffff',
+                borderRadius: 8,
+                padding: '20px 22px',
+                boxShadow: visible ? '0 2px 12px rgba(0,0,0,0.07)' : 'none',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(20px)',
+                transition: `opacity 0.5s ease 0.4s, transform 0.4s ease 0.4s`,
+                textAlign: 'center',
+              }}>
+                <p style={{
+                  fontSize: 10, fontWeight: 800, letterSpacing: 2,
+                  textTransform: 'uppercase', color: '#DD1D21',
+                  marginBottom: 16,
+                }}>
+                  Follow Us
+                </p>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: 16,
+                }}>
+                  {socialLinks.map((social, idx) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={social.label}
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: '50%',
+                        background: '#f5f5f5',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#DD1D21',
+                        fontSize: 20,
+                        transition: 'all 0.3s ease',
+                        textDecoration: 'none',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = social.bgHover;
+                        e.currentTarget.style.color = '#fff';
+                        e.currentTarget.style.transform = 'scale(1.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = '#f5f5f5';
+                        e.currentTarget.style.color = '#DD1D21';
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            {/* RIGHT — Google Map (Fixed) */}
+            <div style={{
+              borderRadius:  10,
+              overflow:      'hidden',
+              boxShadow:     '0 8px 40px rgba(0,0,0,0.12)',
+              opacity:       visible ? 1 : 0,
+              transform:     visible ? 'translateY(0)' : 'translateY(28px)',
+              transition:    'opacity 0.6s 0.3s, transform 0.6s 0.3s',
+              height:        '100%',
+              minHeight:     400,
+              position:      'relative',
+            }}>
+              <iframe
+                title="Shell Ottawa Location"
+                src={mapEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: 'block', minHeight: 400 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* Badge Overlay */}
+              <div style={{
+                position:      'absolute',
+                top:           16, left: 16,
+                background:    '#DD1D21',
+                color:         '#ffffff',
+                padding:       '8px 14px',
+                borderRadius:  6,
+                fontSize:      12, fontWeight: 800,
+                letterSpacing: .5,
+                boxShadow:     '0 4px 16px rgba(221,29,33,0.4)',
+                fontFamily:    "'Trebuchet MS', sans-serif",
+                display:       'flex', alignItems: 'center', gap: 6,
+                pointerEvents: 'none',
+              }}>
+                📍 Shell Ottawa · Verulam
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* ── BOTTOM RED STRIP ── */}
+        {/* BOTTOM RED STRIP */}
         <div style={{
           marginTop:      48,
           borderRadius:   8,
@@ -250,7 +333,7 @@ export default function ContactInfo() {
             </p>
           </div>
           <a
-            href="https://maps.google.com/?q=Ottawa,Verulam,KwaZulu-Natal"
+            href="https://maps.google.com/?q=59+Chris+Hani+Road+Ottawa+Verulam"
             target="_blank"
             rel="noreferrer"
             style={{

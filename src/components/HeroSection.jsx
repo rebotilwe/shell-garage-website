@@ -1,34 +1,30 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from '../assets/images/shell-logo1.png';
 
-const ShellPecten = () => (
-  <svg width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
-    style={{ filter: 'drop-shadow(0 4px 24px rgba(251,206,7,0.45))' }}>
-    <path fill="#DD1D21"
-      d="M50,5C50,5,45,28,28,32C11,36,5,28,5,28C5,28,15,48,10,65C5,82,0,88,0,88L50,72L100,88C100,88,95,82,90,65C85,48,95,28,95,28C95,28,89,36,72,32C55,28,50,5,50,5Z"/>
-    <path fill="#FBCE07"
-      d="M50,20C50,20,46,38,34,42C24,45,16,38,16,38C16,38,26,54,22,66C19,74,14,80,14,80L50,68L86,80C86,80,81,74,78,66C74,54,84,38,84,38C84,38,76,45,66,42C54,38,50,20,50,20Z"/>
-  </svg>
-);
+// Import real images for slides
+import slideFuelImage from '../assets/images/afribiz03009.webp';
+import slide247Image from '../assets/images/afribiz03048.webp';
+import slideSelectImage from '../assets/images/afribiz03036.webp';
 
 const SLIDES = [
   {
-    image: 'https://images.unsplash.com/photo-1545235617-9465d2a55698?w=1600&q=80',
+    image: slideFuelImage,
     label: 'Quality Fuels',
     title: 'Premium Fuels for\nEvery Journey',
     sub: 'Shell FuelSave technology helps your engine run cleaner and go further on every litre.',
     cta: { label: 'Our Fuel Range', to: '/services' },
   },
   {
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80',
+    image: slide247Image,
     label: '24 / 7 Service',
     title: 'Always Open.\nAlways Ready.',
     sub: 'Day or night, Shell Ottawa is your trusted stop in Verulam for fuel, snacks and more.',
     cta: { label: 'Find Us', to: '/contact' },
   },
   {
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80',
+    image: slideSelectImage,
     label: 'Shell Select',
     title: 'Fresh Food &\nConvenience',
     sub: 'Hot meals, cold drinks, everyday essentials — all under one roof at our Shell Select store.',
@@ -62,12 +58,6 @@ export default function HeroSection() {
     initial: { scale: 1.08, opacity: 0 },
     animate: { scale: 1, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
     exit: { scale: 1.04, opacity: 0, transition: { duration: 0.5, ease: "easeIn" } }
-  };
-
-  const contentVariants = {
-    initial: { opacity: 0, y: 40 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.4, ease: "easeIn" } }
   };
 
   const tagVariants = {
@@ -108,7 +98,7 @@ export default function HeroSection() {
       display: 'flex', 
       flexDirection: 'column' 
     }}>
-      {/* ── BACKGROUND IMAGE with Framer Motion ── */}
+      {/* Background Image with Framer Motion */}
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -126,7 +116,7 @@ export default function HeroSection() {
         />
       </AnimatePresence>
 
-      {/* ── OVERLAYS ── */}
+      {/* Overlays */}
       <div style={{
         position: 'absolute', inset: 0,
         background: 'linear-gradient(100deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.45) 60%, rgba(0,0,0,0.15) 100%)',
@@ -136,13 +126,13 @@ export default function HeroSection() {
         background: 'radial-gradient(ellipse at 80% 50%, rgba(221,29,33,0.18) 0%, transparent 60%)',
       }} />
 
-      {/* ── BOTTOM GRADIENT ── */}
+      {/* Bottom Gradient */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: 120,
         background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)',
       }} />
 
-      {/* ── CONTENT with Framer Motion ── */}
+      {/* Content with Framer Motion */}
       <div style={{
         position: 'relative', zIndex: 2,
         maxWidth: '1280px', margin: '0 auto',
@@ -152,7 +142,7 @@ export default function HeroSection() {
       }}>
         <AnimatePresence mode="wait">
           <div key={current}>
-            {/* Pecten + label */}
+            {/* Logo + label */}
             <motion.div
               variants={tagVariants}
               initial="initial"
@@ -160,7 +150,16 @@ export default function HeroSection() {
               exit="exit"
               style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 28 }}
             >
-              <ShellPecten />
+              <img 
+                src={logo} 
+                alt="Shell Ottawa" 
+                style={{ 
+                  width: 48, 
+                  height: 48, 
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 4px 24px rgba(251,206,7,0.45))'
+                }} 
+              />
               <span style={{
                 fontSize: 11, fontWeight: 800, letterSpacing: 3, textTransform: 'uppercase',
                 color: '#FBCE07', fontFamily: "'Trebuchet MS', sans-serif",
@@ -265,7 +264,7 @@ export default function HeroSection() {
         </AnimatePresence>
       </div>
 
-      {/* ── SLIDE DOTS ── */}
+      {/* Slide Dots */}
       <div style={{
         position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)',
         zIndex: 3, display: 'flex', gap: 10, alignItems: 'center',
@@ -286,7 +285,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* ── SLIDE ARROWS ── */}
+      {/* Slide Arrows */}
       {[
         { dir: 'prev', symbol: '‹', style: { left: 24 } },
         { dir: 'next', symbol: '›', style: { right: 24 } },
@@ -314,7 +313,7 @@ export default function HeroSection() {
         </button>
       ))}
 
-      {/* ── BOTTOM YELLOW / RED STRIPE ── */}
+      {/* Bottom Stripe */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: 5, zIndex: 4,
         background: 'linear-gradient(90deg, #DD1D21 0%, #FBCE07 100%)',

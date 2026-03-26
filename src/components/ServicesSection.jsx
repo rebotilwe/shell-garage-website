@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
-import petrolImage from '../assets/images/afribiz03065.webp';
+import petrolImage from '../assets/images/Afribiz03065.webp';
 
 
 const SERVICES = [

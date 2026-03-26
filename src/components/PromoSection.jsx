@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
-import petrolImage from '../assets/images/afribiz03069.webp';
+import petrolImage from '../assets/images/Afribiz03069.webp';
 
 const PROMOS = [
   {

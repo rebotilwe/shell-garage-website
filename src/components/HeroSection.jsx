@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/images/shell-logo1.png';
 
 // Import real images for slides
-import slideFuelImage from '../assets/images/afribiz03009.webp';
-import slide247Image from '../assets/images/afribiz03048.webp';
-import slideSelectImage from '../assets/images/afribiz03036.webp';
+import slideFuelImage from '../assets/images/Afribiz03009.webp';
+import slide247Image from '../assets/images/Afribiz03048.webp';
+import slideSelectImage from '../assets/images/Afribiz03036.webp';
 
 const SLIDES = [
   {

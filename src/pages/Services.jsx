@@ -8,13 +8,13 @@ import { Fuel, ShoppingCart, Waves, Truck, CreditCard, Clock } from 'lucide-reac
 import PageWrapper from '../components/PageWrapper';
 
 // Real images
-import petrolImage from '../assets/images/afribiz03009.webp';
-import dieselImage from '../assets/images/afribiz03065.webp';
-import carWashImage from '../assets/images/afribiz03053.webp';
+import petrolImage from '../assets/images/Afribiz03009.webp';
+import dieselImage from '../assets/images/Afribiz03065.webp';
+import carWashImage from '../assets/images/Afribiz03053.webp';
 import fnbImage from '../assets/images/fnb.png';
 import absaImage from '../assets/images/absa.jpg';
-import cashExpressImage from '../assets/images/afribiz03048.webp';
-import shellSelectImage from '../assets/images/afribiz03059.webp';
+import cashExpressImage from '../assets/images/Afribiz03048.webp';
+import shellSelectImage from '../assets/images/Afribiz03059.webp';
 
 // Try to import courier image - with error handling
 let courierGuy;

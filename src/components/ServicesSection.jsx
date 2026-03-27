@@ -1,96 +1,90 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import petrolImage from '../assets/images/Afribiz03065.webp';
-
+import atmImage from '../assets/images/absa.jpg';
+import courierImage from '../assets/images/courier.png';
+import selectImage from '../assets/images/Afribiz03036.webp';
+import rewardsImage from '../assets/images/Afribiz03048.webp';
+import sparImage from '../assets/images/Afribiz03005.webp';
 
 const SERVICES = [
-   {
-     title:   'Fuel & Petrol',
-     tag:     'FUELS',
-     badge:   '🔥 Best Prices',
-     desc:    'Shell FuelSave 93, 95, V-Power and Diesel — all available 24/7 at the best prices in Ottawa.',
-     image:   petrolImage,
-     accent:  '#DD1D21',
-     cta:     { label: 'View Fuel Prices', to: '/services' },
-   },
   {
-    name:    'Car Wash',
-    tag:     'VALET',
-    icon:    '🚗',
-    desc:    'From a quick rinse to a full valet detail — our car wash leaves your vehicle spotless every time.',
-    image:   'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&q=80',
-    accent:  '#FBCE07',
-    to:      '/services',
+    name: 'V-Power Fuel',
+    tag: 'FUELS',
+    icon: '⛽',
+    desc: 'Shell V-Power 95, FuelSave 93, Diesel Power — premium quality at competitive prices, 24/7.',
+    image: petrolImage,
+    accent: '#DA291C',
+    to: '/services',
   },
   {
-    name:    'ATM',
-    tag:     'BANKING',
-    icon:    '🏧',
-    desc:    '24-hour ATM on site so you always have access to cash whenever you need it, day or night.',
-    image:   'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=600&q=80',
-    accent:  '#DD1D21',
-    to:      '/services',
+    name: 'ATM Services', 
+    tag: 'BANKING',
+    icon: '🏧',
+    desc: 'FNB, ABSA & Cash Express ATMs — secure 24/7 cash access with contactless withdrawals.',
+    image: atmImage,
+    accent: '#004B87',
+    to: '/services',
   },
   {
-    name:    'The Courier Guy',
-    tag:     'COURIER',
-    icon:    '📦',
-    desc:    'Send and receive parcels easily. We are an official The Courier Guy drop-off and collection point.',
-    image:   'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&q=80',
-    accent:  '#FBCE07',
-    to:      '/services',
+    name: 'The Courier Guy',
+    tag: 'COURIER',
+    icon: '📦',
+    desc: 'Official drop-off & collection point. Track parcels instantly at your Shell station.',
+    image: courierImage,
+    accent: '#F7941E',
+    to: '/services',
   },
   {
-    name:    'Shell Select',
-    tag:     'SHOP',
-    icon:    '🛒',
-    desc:    'Hot food, cold drinks, snacks and everyday essentials — all stocked fresh in our convenience store.',
-    image:   'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80',
-    accent:  '#DD1D21',
-    to:      '/services',
+    name: 'Shell Select', 
+    tag: 'SHOP',
+    icon: '🛒',
+    desc: 'Hot meals, cold drinks, snacks & essentials — fresh stock for motorists on the move.',
+    image: selectImage,
+    accent: '#DA291C',
+    to: '/services',
   },
   {
-    name:    'V+ Rewards',
-    tag:     'LOYALTY',
-    icon:    '⭐',
-    desc:    'Earn points on every fuel up and in-store purchase. Redeem for discounts, fuel and exclusive deals.',
-    image:   'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80',
-    accent:  '#FBCE07',
-    to:      '/contact',
+    name: 'Spar Express',
+    tag: 'GROCERY',
+    icon: '🏪',
+    desc: '24/7 convenience store with fresh produce, bakery items & daily essentials.',
+    image: sparImage,
+    accent: '#ED1B2F',
+    to: '/services',
+  },
+  {
+    name: 'V+ Rewards',
+    tag: 'LOYALTY',
+    icon: '⭐',
+    desc: 'Earn points on fuel & shopping. Win R100k weekly + exclusive Shell discounts.',
+    image: rewardsImage,
+    accent: '#FFCD00',
+    to: '/contact',
   },
 ];
 
-// Animation variants for cards
 const cardVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 50,
-    scale: 0.96
-  },
-  visible: (index) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: index * 0.08,
-      duration: 0.5,
-      ease: "easeOut"
-    }
+  hidden: { opacity: 0, y: 40, scale: 0.96 },
+  visible: (i) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: { delay: i * 0.08, duration: 0.5, ease: 'easeOut' },
   }),
-  hover: {
-    y: -7,
-    scale: 1.02,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  }
+  hover: { y: -6, scale: 1.01, transition: { duration: 0.2 } },
 };
 
 function ServiceCard({ svc, index }) {
-  const [hovered, setHovered] = useState(false);
-  const isYellow = svc.accent === '#FBCE07';
+  const isYellow = svc.accent === '#FFCD00';
+  const isSpar = svc.accent === '#ED1B2F';
+  const isCourier = svc.accent === '#F7941E';
+  const isBank = svc.accent === '#004B87';
+
+  const getTextColor = () => {
+    if (isYellow || isSpar || isCourier) return '#1a1a1a';
+    if (isBank) return '#ffffff';
+    return '#ffffff';
+  };
 
   return (
     <motion.div
@@ -99,90 +93,69 @@ function ServiceCard({ svc, index }) {
       initial="hidden"
       whileInView="visible"
       whileHover="hover"
-      viewport={{ once: true, margin: "-50px" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col cursor-pointer h-full"
-      style={{
-        boxShadow: hovered
-          ? `0 20px 48px rgba(0,0,0,0.14), 0 0 0 2px ${svc.accent}`
-          : '0 2px 16px rgba(0,0,0,0.07)',
-      }}
+      viewport={{ once: true, margin: '-50px' }}
+      className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full cursor-pointer border border-gray-100"
     >
       {/* Image Section */}
-      <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden">
+      <div className="relative h-48 md:h-52 overflow-hidden">
         <motion.img
           src={svc.image}
           alt={svc.name}
           className="w-full h-full object-cover"
-          animate={{ scale: hovered ? 1.07 : 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.4 }}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-
-        {/* Tag */}
+        {/* Tag Badge */}
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
-          className="absolute top-3 left-3 px-2 py-1 rounded text-[9px] font-extrabold tracking-[2px] uppercase"
-          style={{
-            background: svc.accent,
-            color: isYellow ? '#1a1a1a' : '#ffffff',
+          transition={{ delay: 0.1 + index * 0.05 }}
+          className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-lg"
+          style={{ 
+            backgroundColor: svc.accent, 
+            color: getTextColor()
           }}
         >
           {svc.tag}
         </motion.div>
 
-        {/* Icon circle */}
+        {/* Icon Badge */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2 + index * 0.05, duration: 0.3 }}
-          className="absolute bottom-3 right-3 w-10 h-10 md:w-[42px] md:h-[42px] rounded-full backdrop-blur-sm flex items-center justify-center text-xl transition-colors duration-300"
-          style={{
-            background: hovered ? svc.accent : 'rgba(0,0,0,0.55)',
-          }}
+          transition={{ delay: 0.2 + index * 0.05 }}
+          className="absolute bottom-4 right-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm flex items-center justify-center text-xl shadow-lg"
         >
           {svc.icon}
         </motion.div>
       </div>
 
-      {/* Accent Line */}
-      <motion.div
-        className="h-0.5"
-        style={{
-          background: `linear-gradient(90deg, ${svc.accent}, ${isYellow ? '#DD1D21' : '#FBCE07'})`,
-          transformOrigin: 'left',
+      {/* Accent Bar */}
+      <div 
+        className="h-1 w-full"
+        style={{ 
+          background: `linear-gradient(90deg, ${svc.accent}, ${isYellow ? '#DA291C' : '#FFCD00'})`
         }}
-        animate={{ scaleX: hovered ? 1 : 0.3 }}
-        transition={{ duration: 0.4 }}
       />
 
       {/* Content */}
-      <div className="p-4 md:p-5 lg:p-6 flex flex-col flex-1">
-        <h3 className="text-lg md:text-xl font-black text-[#1a1a1a] mb-2 tracking-tight">
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-lg md:text-xl font-black text-gray-900 mb-2 group-hover:text-[#DA291C] transition-colors">
           {svc.name}
         </h3>
-        <p className="text-xs md:text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+        <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">
           {svc.desc}
         </p>
         <Link
           to={svc.to}
-          className="inline-flex items-center gap-1.5 text-xs font-extrabold tracking-wide uppercase transition-all duration-200 group"
+          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide transition-all duration-200 hover:gap-3 group/link"
           style={{ color: svc.accent }}
-          onMouseEnter={e => { e.currentTarget.style.gap = '10px'; }}
-          onMouseLeave={e => { e.currentTarget.style.gap = '6px'; }}
         >
           Learn more
-          <motion.span
-            animate={{ x: hovered ? 4 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            →
-          </motion.span>
+          <span className="text-base">→</span>
         </Link>
       </div>
     </motion.div>
@@ -191,82 +164,43 @@ function ServiceCard({ svc, index }) {
 
 export default function ServicesSection() {
   const headerRef = useRef(null);
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
-
-  // Animation variants for header elements
-  const headerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
-
-  const tagVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.5, delay: 0.1 }
-    }
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.5, delay: 0.2 }
-    }
-  };
-
-  const dividerVariants = {
-    hidden: { scaleX: 0, opacity: 0 },
-    visible: { 
-      scaleX: 1, 
-      opacity: 1,
-      transition: { duration: 0.5, delay: 0.4, ease: "easeOut" }
-    }
-  };
-
-  const bottomBannerVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.98 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { duration: 0.5, delay: 0.7, ease: "easeOut" }
-    }
-  };
+  const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
 
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+    <section className="bg-white py-20 md:py-28">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header */}
         <motion.div
           ref={headerRef}
-          variants={headerVariants}
-          initial="hidden"
-          animate={isHeaderInView ? "visible" : "hidden"}
-          className="mb-8 md:mb-12 lg:mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
         >
-          <motion.p
-            variants={tagVariants}
-            className="text-[#DD1D21] text-[10px] sm:text-[11px] font-extrabold tracking-[3px] uppercase mb-2"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            className="inline-flex items-center gap-2 bg-[#DA291C]/10 px-5 py-2 rounded-full mb-5"
           >
-            Shell Ottawa · Verulam
-          </motion.p>
+            <div className="w-2 h-2 bg-[#DA291C] rounded-full animate-pulse" />
+            <span className="text-[#DA291C] text-xs font-bold uppercase tracking-[2px]">
+              Shell Ottawa · Verulam
+            </span>
+          </motion.div>
 
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
             <motion.h2
-              variants={titleVariants}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-black tracking-tight leading-tight text-[#1a1a1a]"
+              initial={{ opacity: 0, y: 15 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900"
             >
               Everything You Need,{' '}
-              <span className="text-[#DD1D21] border-b-4 border-[#FBCE07] pb-0.5">
+              <span className="text-[#DA291C] relative inline-block">
                 One Stop
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#DA291C] to-[#FFCD00] rounded-full" />
               </span>
             </motion.h2>
 
@@ -276,48 +210,48 @@ export default function ServicesSection() {
             >
               <Link
                 to="/services"
-                className="text-[#DD1D21] text-xs sm:text-[13px] font-bold uppercase flex items-center gap-1.5 hover:gap-2.5 transition-all"
+                className="text-[#DA291C] text-sm font-bold uppercase flex items-center gap-1.5 hover:gap-2.5 transition-all"
               >
-                All services →
+                All services
+                <span>→</span>
               </Link>
             </motion.div>
           </div>
 
           <motion.div
-            variants={dividerVariants}
-            className="mt-4 sm:mt-5 h-0.5 w-16 sm:w-20 bg-gradient-to-r from-[#DD1D21] to-[#FBCE07] rounded-full"
-            style={{ transformOrigin: 'left' }}
+            initial={{ scaleX: 0 }}
+            animate={isHeaderInView ? { scaleX: 1 } : {}}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mx-auto h-0.5 w-20 bg-gradient-to-r from-[#DA291C] to-[#FFCD00] rounded-full"
           />
         </motion.div>
 
-        {/* Services Grid - Responsive */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((svc, i) => (
-            <ServiceCard key={i} svc={svc} index={i} />
+            <ServiceCard key={svc.name} svc={svc} index={i} />
           ))}
         </div>
 
-        {/* Bottom Banner - Responsive */}
+        {/* Bottom CTA Banner */}
         <motion.div
-          variants={bottomBannerVariants}
-          initial="hidden"
-          animate={isHeaderInView ? "visible" : "hidden"}
-          className="mt-8 sm:mt-10 md:mt-12 lg:mt-14 rounded-lg overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="mt-16 rounded-2xl overflow-hidden bg-gradient-to-r from-[#DA291C] to-[#b71c1c] shadow-xl"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* Left Section - Dark */}
-            <div className="bg-[#1a1a1a] p-5 sm:p-6 md:p-8 lg:p-10 text-center md:text-left">
-              <p className="text-[#FBCE07] text-[10px] sm:text-[11px] font-extrabold tracking-[2px] uppercase mb-2">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10">
+            <div className="text-center md:text-left">
+              <p className="text-[#FFCD00] text-xs font-bold uppercase tracking-wider mb-2">
                 Open 24 Hours
               </p>
-              <p className="text-white text-base sm:text-lg md:text-xl font-extrabold">
+              <p className="text-white text-xl md:text-2xl font-bold">
                 Fuel up any time — day or night
               </p>
             </div>
-            
-            {/* Right Section - Red */}
-            <div className="bg-[#DD1D21] p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-              <p className="text-white text-sm sm:text-base font-bold">
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <p className="text-white/90 text-sm font-semibold">
                 Questions about our services?
               </p>
               <motion.div
@@ -327,7 +261,7 @@ export default function ServicesSection() {
               >
                 <Link
                   to="/contact"
-                  className="inline-block bg-[#FBCE07] text-[#1a1a1a] px-5 sm:px-6 py-2.5 sm:py-3 rounded text-[11px] sm:text-xs font-extrabold tracking-wide uppercase whitespace-nowrap hover:shadow-lg transition-shadow"
+                  className="inline-block bg-[#FFCD00] text-[#1a1a1a] px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide hover:shadow-lg transition-shadow"
                 >
                   Contact Us →
                 </Link>

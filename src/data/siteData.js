@@ -1,5 +1,9 @@
 import petrolImage from '../assets/images/petrol.avif';
 import dieselImage from '../assets/images/diesel.avif';
+import fnbImage from '../assets/images/fnb.png';
+import absaImage from '../assets/images/absa.jpg';
+import courierImage from '../assets/images/courier.png';
+import sparImage from '../assets/images/Afribiz03005.webp';
 
 export const garageInfo = {
   name: "Shell Spar Express Ottawa",
@@ -9,7 +13,8 @@ export const garageInfo = {
   email: "shellgarageottawa@gmail.com",
   facebook: "https://www.facebook.com/ShellSparExpressOttawa",
   instagram: "https://www.instagram.com/shell_ottawa",
-  description: "Your 24/7 convenience stop in Ottawa, Verulam. Fuel up, grab essentials, and access banking services any time of day or night."
+  tiktok: "https://www.tiktok.com/@shellspar.express",
+  description: "Your 24/7 convenience stop in Ottawa, Verulam. Fuel up, grab essentials at Spar Express, and access banking services any time of day or night."
 }
 
 export const services = [
@@ -29,13 +34,13 @@ export const services = [
     name: "FNB ATM", 
     icon: "🏧", 
     description: "24/7 cash withdrawals and banking services.",
-    image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=600&q=80"
+    image: fnbImage
   },
   { 
     name: "ABSA ATM", 
     icon: "🏧", 
     description: "24/7 banking services including withdrawals and balance inquiries.",
-    image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=600&q=80"
+    image: absaImage
   },
   { 
     name: "Cash Express ATM", 
@@ -47,7 +52,7 @@ export const services = [
     name: "Courier Guy Pickup", 
     icon: "📦", 
     description: "Send and receive parcels at our official collection point.",
-    image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&q=80"
+    image: courierImage
   },
   { 
     name: "Water (R1 per litre)", 
@@ -56,10 +61,10 @@ export const services = [
     image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80"
   },
   { 
-    name: "Spar Convenience Store", 
+    name: "Spar Express", 
     icon: "🏪", 
-    description: "Groceries, snacks, drinks, and everyday essentials.",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80"
+    description: "Groceries, snacks, drinks, and everyday essentials — open 24/7.",
+    image: sparImage
   },
 ]
 
@@ -70,8 +75,8 @@ export const promotions = [
     validUntil: "Valid until end of month"
   },
   {
-    title: "Spar Specials",
-    description: "Check in-store for weekly specials on groceries",
+    title: "Spar Express Specials",
+    description: "Check in-store for weekly specials on groceries and essentials",
     validUntil: "Updated weekly"
   },
   {

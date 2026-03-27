@@ -1,309 +1,247 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Fuel, ShoppingCart, Truck, CreditCard, Star, Clock, MapPin } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { services } from '../data/siteData';
-import { Fuel, ShoppingCart, Waves, Truck, CreditCard, Clock } from 'lucide-react';
 import PageWrapper from '../components/PageWrapper';
 
-// Real images
 import petrolImage from '../assets/images/Afribiz03009.webp';
 import dieselImage from '../assets/images/Afribiz03065.webp';
-import carWashImage from '../assets/images/Afribiz03053.webp';
 import fnbImage from '../assets/images/fnb.png';
 import absaImage from '../assets/images/absa.jpg';
-import cashExpressImage from '../assets/images/Afribiz03048.webp';
 import shellSelectImage from '../assets/images/Afribiz03059.webp';
+import sparImage from '../assets/images/Afribiz03047.webp';
+import courierImage from '../assets/images/courier.png';
+import rewardsImage from '../assets/images/Afribiz03048.webp';
 
-// Try to import courier image - with error handling
-let courierGuy;
-try {
-  courierGuy = require('../assets/images/courier.png');
-} catch (e) {
-  console.log('Courier image not found, using placeholder');
-  courierGuy = null;
-}
-
-import spar from '../assets/images/Afribiz03072.webp';
-
-// Placeholder fallback
 const PLACEHOLDER_URL = "https://placehold.co/400x400/f0f0f0/333?text=";
 
-// Map services to images
 const serviceImages = {
-  'Petrol': petrolImage,
-  'Diesel': dieselImage,
-  'Car Wash': carWashImage,
-  'FNB ATM': fnbImage,
-  'ABSA ATM': absaImage,
-  'Cash Express ATM': cashExpressImage,
-  'Shell Select': shellSelectImage,
-  'V+ Rewards': null,
-  'The Courier Guy': courierGuy,
-  'Water (R1 per litre)': null,
-  'Spar Convenience Store': spar,
-};
-// Icons - Improved to handle all services
-const getIcon = (name) => {
-  const n = name.toLowerCase();
-  if (n.includes('fuel') || n.includes('petrol') || n.includes('diesel')) return <Fuel size={24} />;
-  if (n.includes('store') || n.includes('select') || n.includes('spar')) return <ShoppingCart size={24} />;
-  if (n.includes('wash')) return <Waves size={24} />;
-  if (n.includes('courier')) return <Truck size={24} />;
-  if (n.includes('atm')) return <CreditCard size={24} />;
-  if (n.includes('water')) return <Clock size={24} />;
-  if (n.includes('rewards') || n.includes('v+')) return <Clock size={24} />;
-  return <Clock size={24} />;
+  'Shell V-Power 95': petrolImage,
+  'Shell FuelSave Unleaded': dieselImage,
+  'Shell Select Store': shellSelectImage,
+  'Spar Express': sparImage,
+  'FNB & ABSA ATMs': fnbImage,
+  'The Courier Guy': courierImage,
+  'V+ Rewards Program': rewardsImage,
 };
 
-// Smart Image with error handling
-function SmartImage({ src, alt }) {
+const getServiceIcon = (name) => {
+  const n = name.toLowerCase();
+  if (n.includes('v-power') || n.includes('fuel')) return <Fuel className="w-6 h-6" />;
+  if (n.includes('select') || n.includes('spar')) return <ShoppingCart className="w-6 h-6" />;
+  if (n.includes('courier')) return <Truck className="w-6 h-6" />;
+  if (n.includes('atm') || n.includes('fnb') || n.includes('absa')) return <CreditCard className="w-6 h-6" />;
+  if (n.includes('rewards') || n.includes('v+')) return <Star className="w-6 h-6" />;
+  return <Clock className="w-6 h-6" />;
+};
+
+const SERVICES = [
+  { name: 'Shell V-Power 95', desc: 'Premium performance fuel for maximum engine protection.', image: petrolImage, accent: '#DA291C' },
+  { name: 'Shell FuelSave Unleaded', desc: 'High-quality unleaded fuel for everyday efficiency.', image: dieselImage, accent: '#FFCD00' },
+  { name: 'Spar Express', desc: 'Convenience store with groceries, bakery, and hot meals.', image: sparImage, accent: '#ED1B2F' },
+  { name: 'Shell Select Store', desc: '24/7 convenience with snacks and motoring essentials.', image: shellSelectImage, accent: '#DA291C' },
+  { name: 'FNB & ABSA ATMs', desc: 'Secure 24/7 cash access from leading banks.', image: fnbImage, accent: '#0055A4' },
+  { name: 'The Courier Guy', desc: 'Fast, reliable parcel services.', image: courierImage, accent: '#F7941E' },
+  { name: 'V+ Rewards Program', desc: 'Earn points and enter exclusive draws.', image: rewardsImage, accent: '#FFCD00' }
+];
+
+function SmartImage({ src, alt, className = "" }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const imgSrc = src || `${PLACEHOLDER_URL}${encodeURIComponent(alt)}`;
 
   return (
-    <div className="relative w-full h-full bg-gray-100 overflow-hidden">
-      {!loaded && !error && (
-        <div className="absolute inset-0 animate-pulse bg-gray-200" />
-      )}
-
-      {error && (
-        <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm">
-          Image not available
-        </div>
-      )}
-
+    <div className={`relative w-full h-full rounded-xl overflow-hidden ${className} bg-gray-100`}>
+      {!loaded && !error && <div className="absolute inset-0 animate-pulse bg-gray-200" />}
+      {error && <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+        <MapPin className="w-10 h-10 opacity-50 mb-2"/>
+        <div className="text-sm text-center">Service Available</div>
+      </div>}
       <img
-        src={src}
+        src={imgSrc}
         alt={alt}
         loading="lazy"
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
-        className={`w-full h-full object-cover transition-opacity duration-700 ${
-          loaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`w-full h-full object-cover transition-all duration-700 ${loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
       />
     </div>
   );
 }
 
-// Card animation
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5 }
-  }),
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.06, duration: 0.5 } }),
+  hover: { y: -6, scale: 1.02, transition: { duration: 0.3 } }
 };
 
-// Service Card
 function ServiceCard({ service, index }) {
-  const imageSrc =
-    serviceImages[service.name] ||
-    service.image ||
-    `${PLACEHOLDER_URL}${encodeURIComponent(service.name)}`;
-
   return (
     <motion.div
       custom={index}
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -6 }}
-      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+      whileHover="hover"
+      viewport={{ once: true }}
+      className="group relative"
     >
-      <div className="h-48 overflow-hidden">
-        <SmartImage src={imageSrc} alt={service.name} />
-      </div>
-
-      <div className="p-6">
-        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 text-[#DD1D21] mb-3">
-          {getIcon(service.name)}
+      <div className="relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-[#DA291C]/30 hover:shadow-lg transition-all duration-300 overflow-hidden">
+        {service.image && (
+          <div className="absolute inset-0 -z-10">
+            <SmartImage src={service.image} alt={service.name} className="h-40 object-cover rounded-2xl" />
+          </div>
+        )}
+        <div className="relative z-10 text-center">
+          <div className="w-16 h-16 rounded-xl bg-white/80 flex items-center justify-center shadow-md mx-auto mb-4">
+            {getServiceIcon(service.name)}
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.name}</h3>
+          <p className="text-gray-700 text-sm mb-4">{service.desc}</p>
+          <Link
+            to="/contact"
+            className="inline-block text-sm font-semibold text-[#DA291C] hover:underline"
+          >
+            Learn More →
+          </Link>
         </div>
-
-        <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">
-          {service.name}
-        </h3>
-
-        <p className="text-gray-600 text-sm leading-relaxed">
-          {service.desc || "Premium service available 24/7 at our Shell station."}
-        </p>
       </div>
     </motion.div>
   );
 }
 
-// Premium Gallery with Lightbox
 function PremiumGallery({ images }) {
   const [selected, setSelected] = useState(null);
-
-  const nextImage = () => {
-    setSelected((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setSelected((prev) => (prev - 1 + images.length) % images.length);
-  };
+  const nextImage = () => setSelected((prev) => (prev + 1) % images.length);
+  const prevImage = () => setSelected((prev) => (prev - 1 + images.length) % images.length);
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {images.map((img, index) => (
           <motion.div
             key={index}
             whileHover={{ scale: 1.03 }}
-            className="relative overflow-hidden rounded-2xl cursor-pointer group h-[300px]"
+            className="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-lg transition-all duration-300"
             onClick={() => setSelected(index)}
           >
-            <img
-              src={img}
-              alt="Shell Station"
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-              <span className="text-white font-bold text-lg bg-black/50 px-4 py-2 rounded-full">
-                View
-              </span>
-            </div>
+            <SmartImage src={img} alt={`Station ${index + 1}`} />
           </motion.div>
         ))}
       </div>
 
-      {/* Lightbox */}
       {selected !== null && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 z-[1000] flex items-center justify-center p-4"
+          onClick={() => setSelected(null)}
+        >
           <button
-            onClick={() => setSelected(null)}
-            className="absolute top-6 right-6 text-white text-3xl hover:scale-110 transition"
+            onClick={(e) => { e.stopPropagation(); setSelected(null); }}
+            className="absolute top-4 right-4 text-white text-3xl hover:scale-110 transition-all duration-300"
           >
             ✕
           </button>
-
           <button
-            onClick={prevImage}
-            className="absolute left-6 text-white text-3xl hover:scale-110 transition"
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-4 text-white text-3xl hover:scale-110 transition-all duration-300"
           >
             ‹
           </button>
-
           <motion.img
             key={images[selected]}
             src={images[selected]}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="max-h-[80vh] max-w-[90vw] rounded-xl shadow-2xl"
+            className="max-h-[80vh] max-w-[95vw] rounded-2xl object-contain"
+            alt="Station"
           />
-
           <button
-            onClick={nextImage}
-            className="absolute right-6 text-white text-3xl hover:scale-110 transition"
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-4 text-white text-3xl hover:scale-110 transition-all duration-300"
           >
             ›
           </button>
-        </div>
+        </motion.div>
       )}
     </>
   );
 }
 
 export default function Services() {
+  const galleryImages = [petrolImage, dieselImage, shellSelectImage, sparImage];
+
   return (
     <PageWrapper>
-      <div className="bg-white min-h-screen">
+      <div className="bg-gray-50 min-h-screen">
+    
 
         {/* Hero Section */}
-        <div className="relative h-[70vh] flex items-center justify-center text-center">
-          <img
-            src={petrolImage}
-            alt="Shell Garage"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-
-          <div className="relative z-10 text-white px-6 max-w-3xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl font-black mb-4"
-            >
-              Our Services
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg text-white/90"
-            >
-              Everything you need — fuel, convenience, and more — all in one place.
-            </motion.p>
+        <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
+          <div className="absolute inset-0">
+            <img src={petrolImage} alt="Shell Station" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
           </div>
-        </div>
+          <div className="relative z-10 text-white px-6 max-w-4xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4">
+              Complete Station<br />
+              <span className="text-[#FFCD00]">Services</span>
+            </h1>
+            <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto">
+              Fuel, Spar Express, banking, courier and more — all in one place, 24/7.
+            </p>
+          </div>
+        </section>
 
         {/* Services Grid */}
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ServiceCard key={index} service={service} index={index} />
-            ))}
+        <section className="py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 text-center">
+              What We Offer
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {SERVICES.map((service, index) => (
+                <ServiceCard key={service.name} service={service} index={index} />
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Premium Gallery */}
-        <section className="bg-gray-50 py-20">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-black text-center text-[#1a1a1a] mb-4"
-            >
+        {/* Gallery */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-center">
               Our Station
-            </motion.h2>
-
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
-            >
-              Take a look at our modern Shell station, designed for convenience and speed.
-            </motion.p>
-
-            <PremiumGallery
-              images={[
-                petrolImage,
-                carWashImage,
-                shellSelectImage,
-                dieselImage,
-              ]}
-            />
+            </h2>
+            <PremiumGallery images={galleryImages} />
           </div>
         </section>
 
         {/* CTA Banner */}
-        <div className="bg-gradient-to-r from-[#DD1D21] to-[#b5181b] py-16 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-black mb-4">
-            Visit Us Today
-          </h2>
-          <p className="mb-6 text-white/90">
-            Open 24/7 for your convenience.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-[#FBCE07] text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform"
-          >
-            Contact Us →
-          </Link>
-        </div>
+        <section className="bg-gradient-to-r from-[#DA291C] to-[#b71c1c] py-16 md:py-20 text-center">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              Ready When You Are
+            </h2>
+            <p className="text-base md:text-lg text-white/90 mb-8">
+              Fuel up, shop at Spar Express, or bank — everything is available around the clock.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-block bg-[#FFCD00] text-[#1a1a1a] px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all duration-300"
+            >
+              Visit Station →
+            </Link>
+          </div>
+        </section>
 
-     
+       
       </div>
     </PageWrapper>
   );

@@ -1,69 +1,91 @@
 import { Link } from 'react-router-dom';
+import { FaGasPump, FaStar, FaChevronRight, FaFacebook } from "react-icons/fa";
 
-export default function QuickLinksSection() {
+const FuelIcon = () => <FaGasPump />;
+const StarIcon = () => <FaStar />;
+const ChevronIcon = () => <FaChevronRight />;
+const FacebookIcon = () => <FaFacebook />;
+
+export default function QuickActions() {
   return (
-    <section className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 md:py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        
+        {/* Promo Card */}
+        <a
+          href="https://www.facebook.com/ShellSparExpressOttawa"
+          target="_blank"
+          rel="noreferrer"
+          className="block group"
+        >
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8 transition-all duration-300 hover:shadow-xl border border-gray-800">
+            
+            {/* Background Pattern */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#DA291C]/5 rounded-full blur-3xl" />
+            
+            <div className="relative z-10">
+              {/* Icon */}
+              <div className="w-14 h-14 rounded-xl bg-[#DA291C]/20 flex items-center justify-center mb-5 group-hover:bg-[#DA291C]/30 transition-colors">
+                <FuelIcon className="text-2xl text-[#DA291C]" />
+              </div>
 
-        {/* Header */}
-        <div className="text-center mb-14">
-          <span className="text-[#DD1D21] text-xs tracking-[4px] uppercase font-bold">
-            Quick Access
-          </span>
+              {/* Title */}
+              <h3 className="text-2xl font-black text-white mb-2">
+                Latest Specials
+              </h3>
 
-          <h2 className="text-4xl font-black text-[#0A0A0A] mt-4">
-            Everything You Need
-          </h2>
-        </div>
+              {/* Description */}
+              <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-md">
+                Check our Facebook page for the latest promos, fuel updates and in-store deals.
+              </p>
 
-        {/* Links */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Rating */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <StarIcon key={i} className="text-[#FFCD00] text-sm" />
+                  ))}
+                </div>
+                <span className="text-gray-500 text-xs font-medium">
+                  Follow us for deals
+                </span>
+              </div>
 
-          {/* Contact */}
-          <Link
-            to="/contact"
-            className="group bg-[#0A0A0A] text-white p-8 rounded-2xl hover:scale-105 transition"
-          >
-            <h3 className="text-xl font-bold mb-2">Find Us</h3>
-            <p className="text-white/50 mb-4">
-              Get directions to our location in Ottawa, Verulam.
-            </p>
-            <span className="text-[#FBCE07] group-hover:underline">
-              View Map →
-            </span>
-          </Link>
+              {/* CTA */}
+              <div className="inline-flex items-center gap-2 text-[#DA291C] font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
+                <FacebookIcon className="text-sm" />
+                View Promotions
+                <ChevronIcon className="text-xs" />
+              </div>
+            </div>
+          </div>
+        </a>
 
-          {/* Services */}
+        {/* Bottom Strip: Services CTA */}
+        <div className="mt-6 bg-gray-50 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-100">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-lg bg-[#DA291C]/10 flex items-center justify-center">
+              <FuelIcon className="text-[#DA291C] text-lg" />
+            </div>
+            <div>
+              <p className="text-gray-900 font-bold text-sm">
+                See Everything We Offer
+              </p>
+              <p className="text-gray-500 text-xs">
+                Fuel · Spar Express · ATMs · The Courier Guy · Shell Select
+              </p>
+            </div>
+          </div>
+
           <Link
             to="/services"
-            className="group bg-[#DD1D21] text-white p-8 rounded-2xl hover:scale-105 transition"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-2 border-[#DA291C]/30 text-[#DA291C] font-bold text-xs uppercase tracking-wide hover:bg-[#DA291C]/10 hover:border-[#DA291C] transition-all"
           >
-            <h3 className="text-xl font-bold mb-2">Our Services</h3>
-            <p className="text-white/80 mb-4">
-              Explore everything we offer 24/7.
-            </p>
-            <span className="text-white group-hover:underline">
-              View Services →
-            </span>
+            All Services
+            <ChevronIcon className="text-xs" />
           </Link>
-
-          {/* Promotions */}
-          <a
-            href="https://www.facebook.com/ShellSparExpressOttawa"
-            target="_blank"
-            rel="noreferrer"
-            className="group bg-[#FBCE07] text-black p-8 rounded-2xl hover:scale-105 transition"
-          >
-            <h3 className="text-xl font-bold mb-2">Latest Specials</h3>
-            <p className="text-black/70 mb-4">
-              Check our latest promotions and updates.
-            </p>
-            <span className="group-hover:underline">
-              View Promotions →
-            </span>
-          </a>
-
         </div>
+
       </div>
     </section>
   );

@@ -37,7 +37,7 @@ const SERVICES = [
 ];
 
 const SOCIAL = [
-  { icon: <FacebookIcon />, href: 'https://www.facebook.com/ShellSparExpressOttawa', label: 'Facebook', color: '#1877F2' },
+  { icon: <FacebookIcon />, href: 'https://www.facebook.com/profile.php?id=61576227726268', label: 'Facebook', color: '#1877F2' },
   { icon: <InstagramIcon />, href: 'https://www.instagram.com/shell_ottawa', label: 'Instagram', color: '#E1306C' },
   { icon: <TikTokIcon />, href: 'https://www.tiktok.com/@shellspar.express', label: 'TikTok', color: '#000000' },
 ];
@@ -65,7 +65,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs mx-auto sm:mx-0">
-              Your 24/7 convenience stop in Ottawa, Verulam. Premium fuels, Spar Express, ATMs, and more — all under one roof.
+              Your 24/7 convenience stop in Ottawa, Verulam. Premium fuels, Spar Express, ATMs, and more - all under one roof.
             </p>
             {/* Social Icons */}
             <div className="flex justify-center sm:justify-start gap-3">
@@ -95,12 +95,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2 — Quick Links */}
-          <div className="text-center">
+          {/* Column 2 — Quick Links (Left-aligned on all screens) */}
+          <div className="text-left">
             <h3 className="text-[#FFCD00] text-xs font-bold tracking-[2.5px] uppercase mb-5">
               Quick Links
             </h3>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-start gap-3">
               {QUICK_LINKS.map(({ label, to }) => (
                 <Link
                   key={to}
@@ -114,17 +114,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3 — Services */}
-          <div className="text-center">
+          {/* Column 3 — Services (Left-aligned on all screens) */}
+          <div className="text-left">
             <h3 className="text-[#FFCD00] text-xs font-bold tracking-[2.5px] uppercase mb-5">
               Our Services
             </h3>
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-start gap-3">
               {SERVICES.map(({ label }) => (
                 <Link
                   key={label}
                   to="/services"
-                  className="text-white/55 hover:text-[#FFCD00] text-sm flex items-center justify-center gap-1.5 transition-colors duration-200"
+                  className="text-white/55 hover:text-[#FFCD00] text-sm flex items-center gap-1.5 transition-colors duration-200"
                 >
                   <span className="text-[#DA291C] text-[10px]">▶</span>
                   {label}
@@ -133,20 +133,20 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4 — Contact */}
-          <div className="text-center sm:text-left">
+          {/* Column 4 — Contact (Left-aligned on all screens) */}
+          <div className="text-left">
             <h3 className="text-[#FFCD00] text-xs font-bold tracking-[2.5px] uppercase mb-5">
               Contact Us
             </h3>
             <div className="space-y-4">
               {[
                 { icon: '📍', text: '59 Chris Hani Road, Ottawa, Verulam', href: 'https://maps.google.com/?q=59+Chris+Hani+Road+Ottawa+Verulam' },
-                { icon: '⏰', text: 'Open 24/7 — Including Holidays', href: null },
+                { icon: '⏰', text: 'Open 24/7 - Including Holidays', href: null },
                 { icon: '📞', text: '075 321 4777', href: 'tel:+2753214777' },
                 { icon: '✉️', text: 'shellgarageottawa@gmail.com', href: 'mailto:shellgarageottawa@gmail.com' },
               ].map(({ icon, text, href }) => {
                 const content = (
-                  <div className="flex items-center justify-center sm:justify-start gap-3">
+                  <div className="flex items-center gap-3">
                     <span className="text-base flex-shrink-0">{icon}</span>
                     <span className={`text-sm leading-relaxed ${href ? 'text-white/60' : 'text-white/40'}`}>
                       {text}

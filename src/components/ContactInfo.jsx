@@ -34,7 +34,7 @@ const INFO_ITEMS = [
 ];
 
 const SOCIAL = [
-  { icon: <FaFacebookF />, href: 'https://www.facebook.com/ShellSparExpressOttawa', label: 'Facebook', bgHover: '#1877F2' },
+  { icon: <FaFacebookF />, href: 'https://www.facebook.com/profile.php?id=61576227726268', label: 'Facebook', bgHover: '#1877F2' },
   { icon: <FaInstagram />, href: 'https://www.instagram.com/shell_ottawa', label: 'Instagram', bgHover: '#E1306C' },
   { icon: <FaTiktok />, href: 'https://www.tiktok.com/@shellspar.express', label: 'TikTok', bgHover: '#000000' },
 ];
@@ -86,7 +86,7 @@ export default function ContactInfo() {
           >
             Find Your{' '}
             <span className="text-[#DA291C] relative inline-block whitespace-nowrap">
-              Local Shell Station
+              Shell Ottawa, Verulam
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#DA291C] to-[#FFCD00] rounded-full hidden sm:block" />
             </span>
           </motion.h2>

@@ -1,5 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion, useScroll } from 'framer-motion';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -7,7 +8,18 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 
-// Scroll Progress Bar Component
+// Scroll to Top Component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+// Scroll Progress Bar
 function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
   
@@ -21,7 +33,7 @@ function ScrollProgressBar() {
         left: 0,
         right: 0,
         height: "4px",
-        background: "linear-gradient(to right, #DD1D21, #FBCE07)",
+        background: "linear-gradient(to right, #DA291C, #FFCD00)",
         zIndex: 9999,
       }}
     />
@@ -30,8 +42,9 @@ function ScrollProgressBar() {
 
 function App() {
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className="min-h-screen bg-white">
       <ScrollProgressBar />
+      <ScrollToTop />
       <Navbar />
       <main>
         <Routes>

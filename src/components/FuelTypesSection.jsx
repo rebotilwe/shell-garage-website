@@ -88,7 +88,7 @@ export default function FuelTypesSection() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
-            Full Shell fuel range — always fresh, quality assured, available 24/7 at your local Shell station.
+            Full Shell fuel range — always fresh, quality assured, available 24/7 at  Shell Ottawa, Verulam.
           </motion.p>
         </motion.div>
 

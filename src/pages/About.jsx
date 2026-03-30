@@ -84,7 +84,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      
+  
 
       {/* Hero Section */}
       <motion.section
@@ -100,21 +100,21 @@ export default function About() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
           <span className="text-[#FFCD00] text-xs font-bold tracking-[4px] uppercase mb-4 block">
-            Est. Ottawa · Verulam
+            Est. Ottawa - Verulam
           </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
-            More Than{' '}
-            <span className="relative inline-block">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFCD00] to-white">
-                Just Fuel
-              </span>
-            </span>
-          </h1>
-          <div className="w-24 h-1 bg-[#FFCD00] mx-auto rounded-full mb-6" />
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Shell Ottawa Verulam is your 24/7 community hub. We're more than a fuel station — 
-            we're the precision stop for the modern traveler, engineered for speed and service.
-          </p>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
+  More Than{' '}
+  <span className="relative inline-block">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFCD00] to-white">
+      Just Fuel
+    </span>
+  </span>
+</h1>
+{/* Removed yellow underline line */}
+<p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+  Shell Ottawa Verulam is your 24/7 community hub. We're more than a fuel station - 
+  we're the precision stop for the modern traveler, engineered for speed and service.
+</p>
         </div>
       </motion.section>
 
@@ -129,7 +129,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="text-[#DA291C] text-xs font-bold tracking-[4px] uppercase mb-4 block">
-              01 — Our Legacy
+              01 - Our Legacy
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
               Built on a Foundation of <span className="text-[#DA291C]">Trust</span>
@@ -142,7 +142,7 @@ export default function About() {
             <p className="text-gray-600 text-lg leading-relaxed">
               What started as a simple petrol station has evolved into a full-service hub, 
               combining fuel, Spar Express, courier services, and a fully stocked convenience 
-              store — all under one roof, open 24 hours a day.
+              store - all under one roof, open 24 hours a day.
             </p>
             <div className="mt-8 flex gap-6">
               <div>
@@ -179,16 +179,16 @@ export default function About() {
           </div>
           <div className="order-1 lg:order-2">
             <span className="text-[#DA291C] text-xs font-bold tracking-[4px] uppercase mb-4 block">
-              02 — Our Values
+              02 - Our Values
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
               Engineered for <span className="text-[#FFCD00] bg-gray-900 px-2">Excellence</span>
             </h2>
             <div className="space-y-6">
               {[
-                { title: 'Reliability', desc: "Open 24/7. When you need us, we're here — no exceptions, no excuses." },
+                { title: 'Reliability', desc: "Open 24/7. When you need us, we're here - no exceptions, no excuses." },
                 { title: 'Quality', desc: 'Shell FuelSave and V-Power fuels, fresh food, and premium services. We never compromise on what we offer.' },
-                { title: 'Community', desc: "We're not just a fuel station — we're a neighbourhood hub. Built by Ottawa, for Ottawa and Verulam." },
+                { title: 'Community', desc: "We're not just a fuel station - we're a neighbourhood hub. Built by Ottawa, for Ottawa and Verulam." },
                 { title: 'Convenience', desc: 'Fuel, Spar Express, courier, ATMs, and a fully stocked shop. Everything under one roof to keep you moving.' },
               ].map((item, i) => (
                 <div key={i} className="border-l-4 border-[#DA291C] pl-4">
@@ -215,7 +215,7 @@ export default function About() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DA291C] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DA291C]" />
             </span>
-            <span className="text-[#DA291C] text-xs font-bold tracking-wider uppercase">03 — The 24/7 Promise</span>
+            <span className="text-[#DA291C] text-xs font-bold tracking-wider uppercase">03 - The 24/7 Promise</span>
           </div>
           
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
@@ -262,13 +262,13 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
             <span className="text-[#DA291C] text-xs font-bold tracking-[4px] uppercase mb-4 block">
-              04 — Community Hub
+              04 - Community Hub
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
               The Heart of <span className="text-[#DA291C]">Ottawa</span>
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              More than just a pit stop — we're woven into the fabric of this community.
+              More than just a pit stop - we're woven into the fabric of this community.
               From the early morning commuter to the late-night traveler, we're here for everyone.
             </p>
           </div>
@@ -296,7 +296,7 @@ export default function About() {
             Have Questions? We're Here to Help
           </h2>
           <p className="text-white/80 text-lg mb-8">
-            Whether it's about our services, fuel prices, or anything else — reach out anytime.
+            Whether it's about our services, fuel prices, or anything else - reach out anytime.
           </p>
           <Link
             to="/contact"
@@ -307,6 +307,7 @@ export default function About() {
         </div>
       </section>
 
+  
     </div>
   );
 }

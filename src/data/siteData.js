@@ -11,7 +11,7 @@ export const garageInfo = {
   hours: "24/7",
   phone: "075 321 4777",
   email: "shellgarageottawa@gmail.com",
-  facebook: "https://www.facebook.com/ShellSparExpressOttawa",
+  facebook: "https://www.facebook.com/profile.php?id=61576227726268", // Fixed URL
   instagram: "https://www.instagram.com/shell_ottawa",
   tiktok: "https://www.tiktok.com/@shellspar.express",
   description: "Your 24/7 convenience stop in Ottawa, Verulam. Fuel up, grab essentials at Spar Express, and access banking services any time of day or night."

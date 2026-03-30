@@ -13,7 +13,7 @@ const PROMOS = [
     desc:    'Shell FuelSave 93, 95, V-Power and Diesel — all available 24/7 at the best prices in Ottawa.',
     image:   petrolImage,
     accent:  '#DA291C',
-    cta:     { label: 'View Fuel Prices', to: '/services' },
+    cta:     { label: 'View Fuel Prices', to: 'https://www.facebook.com/profile.php?id=61576227726268', external: true }, // Facebook link
   },
   {
     title:   'Spar Express Specials',
@@ -22,7 +22,7 @@ const PROMOS = [
     desc:    'Visit our Spar Express for fresh sandwiches, hot meals, cold drinks, and everyday essentials — open 24/7.',
     image:   sparImage,
     accent:  '#ED1B2F',
-    cta:     { label: 'Shop Now', to: '/services' },
+    cta:     { label: 'Shop Now', to: 'https://www.facebook.com/profile.php?id=61576227726268', external: true }, // Facebook link
   },
   {
     title:   'Rewards Program',
@@ -31,7 +31,7 @@ const PROMOS = [
     desc:    'Every litre fuelled and every purchase earns you V+ points. Redeem for fuel, food and exclusive rewards.',
     image:   rewardsImage,
     accent:  '#DA291C',
-    cta:     { label: 'Join V+ Rewards', to: '/contact' },
+    cta:     { label: 'Join V+ Rewards', to: '/contact', external: false }, // Contact page
   },
 ];
 
@@ -61,6 +61,14 @@ function PromoCard({ promo, index }) {
     textTransform: 'uppercase',
     transition: 'all 0.2s ease',
   };
+
+  // Determine if link is external or internal
+  const isExternal = promo.cta.external;
+  const linkProps = isExternal
+    ? { href: promo.cta.to, target: "_blank", rel: "noopener noreferrer" }
+    : { to: promo.cta.to };
+
+  const LinkComponent = isExternal ? 'a' : Link;
 
   return (
     <motion.div
@@ -128,11 +136,11 @@ function PromoCard({ promo, index }) {
         <h3 className="text-xl font-black text-gray-900 mb-2 tracking-tight">
           {promo.title}
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">
+        <p className="text-sm text-gray-700 leading-relaxed mb-5 flex-1">
           {promo.desc}
         </p>
-        <Link
-          to={promo.cta.to}
+        <LinkComponent
+          {...linkProps}
           className="inline-flex items-center gap-2 self-start transition-all duration-200"
           style={ctaStyle}
           onMouseEnter={e => (e.currentTarget.style.gap = '12px')}
@@ -142,7 +150,7 @@ function PromoCard({ promo, index }) {
           <motion.span animate={{ x: hovered ? 4 : 0 }} transition={{ duration: 0.2 }}>
             →
           </motion.span>
-        </Link>
+        </LinkComponent>
       </div>
     </motion.div>
   );

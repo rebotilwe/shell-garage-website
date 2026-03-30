@@ -30,7 +30,7 @@ export default function SocialFeed() {
     { 
       name: 'Facebook', 
       icon: <FaFacebookF />, 
-      url: 'https://www.facebook.com/ShellSparExpressOttawa',
+      url: 'https://www.facebook.com/profile.php?id=61576227726268',
       color: '#1877F2',
       hoverColor: '#1877F2'
     },
@@ -173,7 +173,7 @@ export default function SocialFeed() {
               Get the latest fuel prices, specials, and promotions directly from our Facebook page.
             </p>
             <a
-              href="https://www.facebook.com/ShellSparExpressOttawa"
+              href="https://www.facebook.com/profile.php?id=61576227726268"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0d5ed7] transition-all duration-300"
